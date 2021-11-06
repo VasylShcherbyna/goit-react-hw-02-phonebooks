@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import shortid from 'shortid';
+import CssModule from './IndexModule.css';
 
 import ContactForm from './Componnent/ContactForm';
+import ContactList from './Componnent/ListContact';
+import Filter from './Componnent/Filtr';
 
 class App extends Component {
   state = {
@@ -34,16 +37,44 @@ class App extends Component {
       }));
     }
   };
+  changeFilter = filter => {
+    this.setState({ filter });
+  };
+
+  getVisibleContacts = () => {
+    const { contacts, filter } = this.state;
+
+    return contacts.filter(contacts =>
+      contacts.name.toLowerCase().includes(filter.toLowerCase()),
+    );
+  };
+
+  removeContact = contactId => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+      };
+    });
+  };
 
   render() {
+    const { filter } = this.state;
+
+    const visibleContacts = this.getVisibleContacts();
+
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.Contact} />
+        <ContactForm onAddContact={this.addContact} />
 
         <h2>Contacts</h2>
-        {/* <Filter />
-      <ContactList /> */}
+        <Filter value={filter} onChangeFilter={this.changeFilter} />
+        {visibleContacts.length && (
+          <ContactList
+            contacts={visibleContacts}
+            onRemoveContact={this.removeContact}
+          />
+        )}
       </div>
     );
   }
