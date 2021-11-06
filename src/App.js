@@ -59,20 +59,21 @@ class App extends Component {
 
   render() {
     const { filter } = this.state;
+    const { addContact, changeFilter, removeContact } = this;
 
     const visibleContacts = this.getVisibleContacts();
 
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onAddContact={this.addContact} />
+        <ContactForm onAddContact={addContact} />
 
         <h2>Contacts</h2>
-        <Filter value={filter} onChangeFilter={this.changeFilter} />
+        <Filter value={filter} onChangeFilter={changeFilter} />
         {visibleContacts.length && (
           <ContactList
             contacts={visibleContacts}
-            onRemoveContact={this.removeContact}
+            onRemoveContact={removeContact}
           />
         )}
       </div>
