@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 class ContactForm extends React.Component {
   state = {
-    contacts: [],
     name: '',
     number: '',
   };
@@ -20,6 +19,9 @@ class ContactForm extends React.Component {
 
     this.props.onAddContact({ ...this.state });
 
+    this.reset();
+  };
+  reset = () => {
     this.setState({ name: '', number: '' });
   };
 

@@ -16,11 +16,11 @@ class App extends Component {
     ],
     filter: '',
   };
-
   addContact = task => {
-    const searchSameName = this.state.contacts
-      .map(cont => cont.name)
-      .includes(task.name);
+    const taskNameNormalized = task.name.toLowerCase();
+    const searchSameName = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === taskNameNormalized,
+    );
 
     if (searchSameName) {
       alert(`${task.name} is already in contacts`);
@@ -70,7 +70,7 @@ class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={filter} onChangeFilter={changeFilter} />
-        {visibleContacts.length && (
+        {visibleContacts && (
           <ContactList
             contacts={visibleContacts}
             onRemoveContact={removeContact}
