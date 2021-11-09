@@ -20,6 +20,7 @@ const ListContact = ({ contacts, onRemoveContact }) => (
     ))}
   </ul>
 );
+console.log(ListContact.contacts);
 
 ListContact.propTypes = {
   onRemoveContact: PropTypes.func.isRequired,

@@ -22,12 +22,10 @@ class App extends Component {
     const parsedContacts = JSON.parse(contacts);
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
-      console.log(this.setState);
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.contacts);
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
