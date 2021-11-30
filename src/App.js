@@ -38,7 +38,7 @@ function App() {
         id: shortid(),
       };
 
-      setContacts(prevState => [...prevState.contacts, contact]);
+      setContacts(prevState => [...prevState, contact]);
     }
   };
   const changeFilter = filter => {
